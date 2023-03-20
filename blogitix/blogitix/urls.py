@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), # This line allows us to use the built-in Django authentication views and templates
     path('accounts/', include('accounts.urls')),
+    path('', include('myblog.urls')),
 ]
