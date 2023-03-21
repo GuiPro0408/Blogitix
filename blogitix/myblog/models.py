@@ -4,6 +4,12 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, default='uncategorized')
+
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete= models.CASCADE,related_name='posts')
@@ -11,6 +17,7 @@ class Post(models.Model):
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     slug = models.CharField(max_length=200, unique=True, null=False)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
 
     class Meta:
         ordering = ['-created_on']
