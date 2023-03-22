@@ -15,3 +15,8 @@ class AddPostView(generic.CreateView):
     model = Post
     template_name = 'add_post.html'
     fields = '__all__'
+
+class UpdatePostView(generic.UpdateView):
+    model = Post
+    template_name = 'update_post.html'
+    fields = ['content']
