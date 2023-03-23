@@ -12,6 +12,7 @@
         <div class="card-body">
           <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
           <p class="card-text ">{{ object.content | safe }}</p>
+          <a href="{% url 'update_post' post.slug  %}" class="btn btn-primary">Edit</a>
         </div>
       </div>
     </div>

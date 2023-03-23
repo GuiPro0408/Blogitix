@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from django.views import generic
 from .models import Post, Category
-from .forms import PostForm
 from django.urls import reverse_lazy
+from .forms import PostForm, UpdatePostForm
 
 # Create your views here.
 class PostList(generic.ListView):
@@ -29,9 +28,9 @@ class AddPostView(generic.CreateView):
 
 class UpdatePostView(generic.UpdateView):
     model = Post
+    form_class = UpdatePostForm # This line adds the form to the view.
     template_name = 'update_post.html'
-    fields = ['content']
-
+    
 class DeletePostView(generic.DeleteView):
     model = Post
     template_name = 'delete_post.html'
