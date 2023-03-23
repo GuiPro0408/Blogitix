@@ -14,10 +14,12 @@
         <div class="card mb-4">
           <div class="card-body">
             <h2 class="card-title">{{ post.title }}</h2>
-            <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} </p>
-            <p class="card-text">{{post.content|slice:":200" }}</p>
-            <a href="{% url 'update_post' post.slug  %}" class="btn btn-primary">Edit</a>
-            <a href="{% url 'delete_post' post.slug  %}" class="btn btn-primary">Delete</a>
+            <p class="card-text text-muted h6">{{ post.author }} | {{ post.created_on}} | <small>{{ post.category }} Category</small></p>
+            <p class="card-text mt-4">{{post.content|slice:":200" }}</p>
+            {% if post.author == request.user %} 
+              <a href="{% url 'update_post' post.slug  %}" class="btn btn-success">Edit</a>
+              <a href="{% url 'delete_post' post.slug  %}" class="btn btn-danger">Delete</a>
+            {% endif %}
             <a href="{% url 'post_detail' post.slug %}" class="btn btn-primary">View</a>
           </div>
         </div>
