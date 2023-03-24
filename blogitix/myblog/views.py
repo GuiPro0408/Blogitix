@@ -2,6 +2,7 @@ from django.views import generic
 from .models import Post, Category
 from django.urls import reverse_lazy
 from .forms import PostForm, UpdatePostForm
+from django.contrib.auth.mixins import LoginRequiredMixin # is used to restrict access to a view to authenticated users only.
 
 # Create your views here.
 class PostList(generic.ListView):
@@ -12,7 +13,7 @@ class PostDetail(generic.DetailView):
     model = Post
     template_name = 'post_detail.html'
 
-class AddPostView(generic.CreateView):
+class AddPostView(LoginRequiredMixin, generic.CreateView):
     model = Post
     form_class = PostForm # This line adds the form to the view.
     template_name = 'add_post.html'
@@ -26,12 +27,12 @@ class AddPostView(generic.CreateView):
         initial['author'] = self.request.user
         return initial
 
-class UpdatePostView(generic.UpdateView):
+class UpdatePostView(LoginRequiredMixin, generic.UpdateView):
     model = Post
     form_class = UpdatePostForm # This line adds the form to the view.
     template_name = 'update_post.html'
     
-class DeletePostView(generic.DeleteView):
+class DeletePostView(LoginRequiredMixin, generic.DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
